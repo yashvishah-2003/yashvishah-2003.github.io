@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard | Medicine Bot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow: auto; /* allow scroll on small screens */
+    }
+
+    .header {
+      background: #075e54;
+      color: white;
+      padding: 10px 18px;
+      font-size: 18px;
+      font-weight: bold;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .more-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .content {
+      /* was fixed height with overflow hidden */
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: calc(100vh - 50px); /* header approx */
+    }
+
+    /* KPI GRID */
+    .kpi-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    /* KPI CARD */
+    .kpi-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.12);
+    }
+
+    .kpi-header {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .kpi-value {
+      font-size: 26px;
+      font-weight: bold;
+      margin-top: 6px;
+      color: #075e54;
+    }
+
+    /* CHART GRID LAYOUT */
+    .chart-container-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .chart-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 0px 3px 10px rgba(0,0,0,0.12);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 230px; /* base height */
+    }
+
+    .chart-card canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* SIDE MENU */
+    .side-menu {
+      width: 260px;
+      height: 100%;
+      background-color: #ffffff;
+      position: fixed;
+      top: 0;
+      left: -260px;
+      transition: 0.3s ease;
+      box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 2000;
+      padding-top: 10px;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .side-menu-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .side-menu-item {
+      padding: 15px;
+      font-size: 17px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .side-menu-item:hover {
+      background-color: #f2f2f2;
+    }
+
+    .logout-btn {
+      font-weight: bold;
+      color: #c62828;
+    }
+
+    .logout-btn:hover {
+      background-color: #ffe3e3;
+    }
+
+    /* ====== RESPONSIVE BREAKPOINTS ====== */
+
+    /* Tablets / small laptops */
+    @media (max-width: 1180px) {
+      .chart-card {
+        height: 260px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .header {
+        font-size: 16px;
+        padding: 8px 12px;
+      }
+
+      .more-btn {
+        font-size: 22px;
+      }
+
+      .kpi-value {
+        font-size: 22px;
+      }
+
+      .chart-card {
+        height: 220px;
+      }
+
+      .side-menu {
+        width: 75%;
+        left: -75%;
+      }
+    }
+
+    /* Very small mobile */
+    @media (max-width: 450px) {
+      .chart-card {
+        height: 200px;
+      }
+
+      .kpi-card {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SIDE NAV MENU -->
+  <div id="sideMenu" class="side-menu">
+    <div class="side-menu-header">
+      <strong>Menu</strong>
+      <span class="close-btn" onclick="toggleMenu()">✖</span>
+    </div>
+
+    <div class="side-menu-item" onclick="window.location.href='index.html'">
+      Chatbot
+    </div>
+    <div class="side-menu-item" onclick="window.location.href='admin.html'">
+      Admin Dashboard
+    </div>
+    <div class="side-menu-item logout-btn" onclick="logoutUser()">
+      Logout
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <button class="more-btn" onclick="toggleMenu()">☰</button>
+    <span>Admin Dashboard</span>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div class="content">
+
+    <!-- KPI GRID -->
+    <div class="kpi-container">
+
+      <div class="kpi-card">
+        <div class="kpi-header"><span>Total User Messages</span></div>
+        <div class="kpi-value" id="totalMessagesValue">0</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header"><span>Customers Who Ordered</span></div>
+        <div class="kpi-value" id="kpiCustomersOrdersValue">0 / 0</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header"><span>Products Ordered</span></div>
+        <div class="kpi-value" id="productsOrderedValue">0</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header"><span>Units Ordered</span></div>
+        <div class="kpi-value" id="unitsOrderedValue">0</div>
+      </div>
+
+    </div>
+
+    <!-- FIRST ROW OF CHARTS -->
+    <div class="chart-container-grid">
+      <div class="chart-card">
+        <canvas id="messagesOrdersChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <canvas id="salesRepChart"></canvas>
+      </div>
+    </div>
+
+    <!-- SECOND ROW OF CHARTS -->
+    <div class="chart-container-grid">
+      <div class="chart-card">
+        <canvas id="classificationPieChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <canvas id="locationMessagesOrdersChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    // ===========================
+    //  GLOBAL CONFIG & HELPERS
+    // ===========================
+
+    const API_BASE = "http://localhost:8001/api/admin";
+
+    async function apiGet(endpoint) {
+      try {
+        const res = await fetch(`${API_BASE}${endpoint}`);
+        return await res.json();
+      } catch (err) {
+        console.error("API error on", endpoint, err);
+        return { success: false, error: "Network error" };
+      }
+    }
+
+    // ===========================
+    //  KPI LOADERS
+    // ===========================
+
+    async function loadKPIs() {
+      await loadTotalMessages();
+      await loadCustomersOrdered();
+      await loadProductsOrdered();
+      await loadUnitsOrdered();
+    }
+
+    async function loadTotalMessages() {
+      const el = document.getElementById("totalMessagesValue");
+      el.textContent = "...";
+      const data = await apiGet("/kpi/total-messages");
+      if (data && data.success) {
+        el.textContent = data.total_messages;
+      } else {
+        el.textContent = "Err";
+      }
+    }
+
+    async function loadCustomersOrdered() {
+      const el = document.getElementById("kpiCustomersOrdersValue");
+      el.textContent = "...";
+      const data = await apiGet("/kpi/customers-with-orders");
+      if (data && data.success) {
+        el.textContent = `${data.customers_with_orders} / ${data.total_customers}`;
+      } else {
+        el.textContent = "Err";
+      }
+    }
+
+    async function loadProductsOrdered() {
+      const el = document.getElementById("productsOrderedValue");
+      el.textContent = "...";
+      const data = await apiGet("/kpi/products-ordered");
+      if (data && data.success) {
+        el.textContent = data.products_ordered;
+      } else {
+        el.textContent = "Err";
+      }
+    }
+
+    async function loadUnitsOrdered() {
+      const el = document.getElementById("unitsOrderedValue");
+      el.textContent = "...";
+      const data = await apiGet("/kpi/units-ordered");
+      if (data && data.success) {
+        el.textContent = data.units_ordered;
+      } else {
+        el.textContent = "Err";
+      }
+    }
+
+    // ===========================
+    //  CHART HELPERS
+    // ===========================
+
+    function createMessagesOrdersChart(labels, messages, orders) {
+      const ctx = document.getElementById("messagesOrdersChart");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "User Queries",
+              data: messages,
+              backgroundColor: "rgba(54, 162, 235, 0.9)"
+            },
+            {
+              label: "Orders",
+              data: orders,
+              backgroundColor: "rgba(255, 159, 64, 0.9)"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { top: 10, bottom: 5 } },
+          plugins: {
+            legend: {
+              position: "top",
+              labels: { font: { size: 12 }, padding: 10 }
+            },
+            title: {
+              display: true,
+              text: "User Queries vs Orders",
+              padding: { top: 5, bottom: 10 },
+              font: { size: 16, weight: "bold" }
+            }
+          },
+          scales: {
+            x: { grid: { display: false } },
+            y: { beginAtZero: true, grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    function createSalesRepChart(labels, customersAssigned, ordersReceived) {
+      const ctx = document.getElementById("salesRepChart");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Orders Received",
+              data: ordersReceived,
+              backgroundColor: "rgba(54, 162, 235, 0.9)"
+            },
+            {
+              label: "Customers Assigned",
+              data: customersAssigned,
+              backgroundColor: "rgba(255, 159, 64, 0.9)"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: "top" },
+            title: {
+              display: true,
+              text: "Customers Assigned vs Orders Received (By Sales Rep)",
+              font: { size: 16, weight: "bold" }
+            }
+          },
+          scales: {
+            x: {
+              stacked: false,
+              grid: { display: false }
+            },
+            y: {
+              stacked: false,
+              beginAtZero: true,
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    function createTopMedicinesChart(labels, values) {
+      const ctx = document.getElementById("classificationPieChart");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{
+            label: "Number of Requests",
+            data: values,
+            backgroundColor: "rgba(54,162,235,0.9)"
+          }]
+        },
+        options: {
+          indexAxis: "y",
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Top 3 Requested Medicines",
+              font: { size: 16, weight: "bold" }
+            }
+          },
+          scales: {
+            x: { beginAtZero: true, grid: { display: false } },
+            y: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    function createLocationMessagesOrdersChart(labels, messages, orders) {
+      const ctx = document.getElementById("locationMessagesOrdersChart");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "User Queries",
+              data: messages,
+              backgroundColor: "rgba(54, 162, 235, 0.9)"
+            },
+            {
+              label: "Orders",
+              data: orders,
+              backgroundColor: "rgba(255, 159, 64, 0.9)"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: { padding: { top: 10, bottom: 5 } },
+          plugins: {
+            legend: {
+              position: "top",
+              labels: { font: { size: 12 }, padding: 10 }
+            },
+            title: {
+              display: true,
+              text: "User Queries & Orders by Location",
+              padding: { top: 5, bottom: 10 },
+              font: { size: 16, weight: "bold" }
+            }
+          },
+          scales: {
+            x: { grid: { display: false } },
+            y: { beginAtZero: true, grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    // ===========================
+    //  CHART LOADERS
+    // ===========================
+
+    async function loadMessagesOrdersChart() {
+      const data = await apiGet("/chart/messages-vs-orders");
+      if (!data || !data.success) return;
+
+      const labels = data.data.map(x => x.date);
+      const messages = data.data.map(x => x.messages);
+      const orders = data.data.map(x => x.orders);
+
+      createMessagesOrdersChart(labels, messages, orders);
+    }
+
+    async function loadSalesRepChart() {
+      const data = await apiGet("/chart/salesrep-customers");
+      if (!data || !data.success) return;
+
+      const labels = data.data.map(x => x.salesrep);
+      const customersAssigned = data.data.map(x => x.customers_assigned);
+      const ordersReceived = data.data.map(x => x.orders_received);
+
+      createSalesRepChart(labels, customersAssigned, ordersReceived);
+    }
+
+    async function loadTopMedicinesChart() {
+      const data = await apiGet("/chart/top-medicines");
+      console.log("TOP MEDICINES API:", data);
+      if (!data || !data.success) return;
+
+      const labels = data.data.map(x => x.medicine);
+      const values = data.data.map(x => x.count);
+
+      createTopMedicinesChart(labels, values);
+    }
+
+    async function loadLocationMessagesOrdersChart() {
+      const data = await apiGet("/chart/location-messages-orders");
+      console.log("LOCATION DATA:", data);
+      if (!data || !data.success) return;
+
+      const labels = data.data.map(x => x.location);
+      const messages = data.data.map(x => x.messages);
+      const orders = data.data.map(x => x.orders);
+
+      createLocationMessagesOrdersChart(labels, messages, orders);
+    }
+
+    // ===========================
+    //  UI HELPERS
+    // ===========================
+
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      menu.style.left = (menu.style.left === "0px") ? "-260px" : "0px";
+    }
+
+    function logoutUser() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+
+    // ===========================
+    //  INIT DASHBOARD
+    // ===========================
+
+    async function initDashboard() {
+      await loadKPIs();
+      await loadMessagesOrdersChart();
+      await loadSalesRepChart();
+      await loadTopMedicinesChart();
+      await loadLocationMessagesOrdersChart();
+    }
+
+    // Run once DOM is loaded
+    document.addEventListener("DOMContentLoaded", initDashboard);
+  </script>
+
+</body>
+</html>

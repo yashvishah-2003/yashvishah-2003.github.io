@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | Medicine Bot</title>
+
+    <!-- CRITICAL FOR MOBILE RESPONSIVENESS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            background: #075e54;
+            color: white;
+            min-height: 100vh;     /* instead of fixed 100vh */
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto;      /* allow scrolling on mobile */
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 35px 32px;
+            border-radius: 18px;
+            width: 90%;            /* fully fluid */
+            max-width: 420px;      /* smaller than before for phones */
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        }
+
+        h2 {
+            margin: 0 0 22px 0;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .login-form input {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-form button {
+            padding: 14px;
+            background: #25d366;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.25s;
+        }
+
+        .login-form button:hover {
+            background: #128c7e;
+        }
+
+        #error-msg {
+            margin-top: 14px;
+            color: #ffbbbb;
+            font-size: 0.9rem;
+            min-height: 18px;
+        }
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .login-box { padding: 28px 24px; }
+            h2 { font-size: 1.4rem; }
+        }
+
+        /* Phones */
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 22px 18px;
+                border-radius: 14px;
+            }
+            h2 { font-size: 1.3rem; }
+            .login-form input, .login-form button {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="login-box">
+    <h2>Login to Medicine Bot</h2>
+
+    <div class="login-form">
+        <input id="username" placeholder="Username">
+        <input id="password" type="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="error-msg"></div>
+</div>
+
+<script>
+const API_BASE = 'http://localhost:8001';
+
+async function login() {
+    const user = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+
+    if (!user || !pass) {
+        document.getElementById("error-msg").textContent = "Please enter credentials";
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("username", user);
+    formData.append("password", pass);
+
+    try {
+        const res = await fetch(`${API_BASE}/api/login`, {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            localStorage.setItem("customer_name", user);
+            window.location.href = "index.html";
+        } else {
+            document.getElementById("error-msg").textContent = data.message;
+        }
+
+    } catch (error) {
+        document.getElementById("error-msg").textContent = "Server error!";
+    }
+}
+</script>
+
+</body>
+</html>
