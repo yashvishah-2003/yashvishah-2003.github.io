@@ -472,72 +472,6 @@
     font-size: 18px;
   }
 }
-/* ================================
-   Tablet Portrait (768px – 1024px)
-   iPad Vertical View
-================================ */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .chat-container {
-    padding: 16px 35px;
-    height: calc(100vh - 128px);
-    overflow-y: auto;
-  }
-
-  /* Keep input bar fixed, always visible */
-  .input-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 12px 24px;
-    z-index: 9999;
-  }
-
-  #chat-container {
-    margin-bottom: 85px; /* space below for input */
-  }
-
-  .message-bubble {
-    max-width: 75%;
-  }
-
-  .product-card {
-    width: 420px;
-  }
-}
-
-/* ================================
-   Tablet Landscape (1024px – 1280px)
-   iPad Horizontal view
-================================ */
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .chat-container {
-    padding: 20px 120px;  /* Wider spacing like desktop */
-    height: calc(100vh - 128px);
-  }
-
-  .input-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 12px 140px;
-    z-index: 9999;
-  }
-
-  #chat-container {
-    margin-bottom: 90px;
-  }
-
-  .message-bubble {
-    max-width: 60%;
-  }
-
-  .product-card {
-    width: 420px;
-  }
-}
-
 
     </style>
 </head>
@@ -892,6 +826,7 @@ function logoutUser() {
 
 </body>
 </html>
+
 
 
 
