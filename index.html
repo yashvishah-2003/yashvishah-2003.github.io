@@ -428,9 +428,8 @@
       font-weight: 600;
     }
 /* ==========================================================
-   RESPONSIVE BREAKPOINTS FOR INDEX.HTML
-   Keep desktop layout same (only scale on big screens)
-   Improve mobile & tablet spacing and message widths
+   RESPONSIVE BREAKPOINTS FOR INDEX.HTML -- FIXED VERSION
+   No layout shifting, no chat bubble width changes
 ========================================================== */
 
 /* Mobile (Phones < 600px) */
@@ -440,8 +439,7 @@
         height: calc(100vh - 120px);
     }
 
-    .message-bubble {
-        max-width: 90% !important;
+    .message-content {
         font-size: 14px;
     }
 
@@ -472,8 +470,7 @@
         height: calc(100vh - 130px);
     }
 
-    .message-bubble {
-        max-width: 80%;
+    .message-content {
         font-size: 15px;
     }
 
@@ -486,10 +483,6 @@
 @media (min-width: 768px) and (max-width: 1024px) {
     .chat-container {
         padding: 20px 60px;
-    }
-
-    .message-bubble {
-        max-width: 70%;
     }
 
     .product-card {
@@ -511,30 +504,15 @@
         height: calc(100vh - 140px);
     }
 
-    .message-bubble {
-        max-width: 55%;
-        font-size: 15px;
-    }
-
     .product-card {
         width: 420px;
-        max-width: 420px;
     }
 
     .input-container {
         padding: 15px 140px;
     }
-
-    #message-input {
-        font-size: 16px;
-    }
-
-    .send-btn {
-        width: 52px;
-        height: 52px;
-        font-size: 22px;
-    }
 }
+
 
 
     </style>
@@ -895,4 +873,5 @@ function logoutUser() {
 
 </body>
 </html>
+
 
