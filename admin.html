@@ -307,7 +307,7 @@
     async function loadTotalMessages() {
       const el = document.getElementById("totalMessagesValue");
       el.textContent = "...";
-      const data = await apiGet("kpi/total-messages");
+      const data = await apiGet("/api/admin/kpi/total-messages");
       if (data && data.success) {
         el.textContent = data.total_messages;
       } else {
@@ -318,7 +318,7 @@
     async function loadCustomersOrdered() {
       const el = document.getElementById("kpiCustomersOrdersValue");
       el.textContent = "...";
-      const data = await apiGet("kpi/customers-with-orders");
+      const data = await apiGet("/api/admin/kpi/customers-with-orders");
       if (data && data.success) {
         el.textContent = `${data.customers_with_orders} / ${data.total_customers}`;
       } else {
@@ -329,7 +329,7 @@
     async function loadProductsOrdered() {
       const el = document.getElementById("productsOrderedValue");
       el.textContent = "...";
-      const data = await apiGet("kpi/products-ordered");
+      const data = await apiGet("/api/admin/kpi/products-ordered");
       if (data && data.success) {
         el.textContent = data.products_ordered;
       } else {
@@ -340,7 +340,7 @@
     async function loadUnitsOrdered() {
       const el = document.getElementById("unitsOrderedValue");
       el.textContent = "...";
-      const data = await apiGet("kpi/units-ordered");
+      const data = await apiGet("/api/admin/kpi/units-ordered");
       if (data && data.success) {
         el.textContent = data.units_ordered;
       } else {
@@ -520,7 +520,7 @@
     // ===========================
 
     async function loadMessagesOrdersChart() {
-      const data = await apiGet("chart/messages-vs-orders");
+      const data = await apiGet("/api/admin/chart/messages-vs-orders");
       if (!data || !data.success) return;
 
       const labels = data.data.map(x => x.date);
@@ -531,7 +531,7 @@
     }
 
     async function loadSalesRepChart() {
-      const data = await apiGet("chart/salesrep-customers");
+      const data = await apiGet("/api/admin/chart/salesrep-customers");
       if (!data || !data.success) return;
 
       const labels = data.data.map(x => x.salesrep);
@@ -542,7 +542,7 @@
     }
 
     async function loadTopMedicinesChart() {
-      const data = await apiGet("chart/top-medicines");
+      const data = await apiGet("/api/admin/chart/classification-units");
       console.log("TOP MEDICINES API:", data);
       if (!data || !data.success) return;
 
@@ -553,7 +553,7 @@
     }
 
     async function loadLocationMessagesOrdersChart() {
-      const data = await apiGet("chart/location-messages-orders");
+      const data = await apiGet("/api/admin/chart/location-messages-orders");
       console.log("LOCATION DATA:", data);
       if (!data || !data.success) return;
 
@@ -596,5 +596,6 @@
 
 </body>
 </html>
+
 
 
