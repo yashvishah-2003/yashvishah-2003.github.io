@@ -430,29 +430,49 @@
     }
 /* Mobile Phones (<600px) */
 @media (max-width: 600px) {
+
   .chat-container {
     padding: 12px;
-    height: calc(100vh - 120px);
+    height: auto;          /* Allow flexible height */
+    flex: 1;
+    overflow-y: auto;
   }
+
+  /* Always visible at bottom */
+  .input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px 10px;
+    z-index: 9999;         /* Highest priority */
+  }
+
+  /* Extra space so chat content doesn't hide behind input bar */
+  #chat-container {
+    margin-bottom: 70px;
+  }
+
   .message-bubble {
     max-width: 90% !important;
     font-size: 14px;
   }
+
   .product-card {
     width: 95% !important;
   }
-  .input-container {
-    padding: 8px 10px;
-  }
+
   #message-input {
     font-size: 14px;
   }
+
   .send-btn {
     width: 42px;
     height: 42px;
     font-size: 18px;
   }
 }
+
 
     </style>
 </head>
@@ -812,6 +832,7 @@ function logoutUser() {
 
 </body>
 </html>
+
 
 
 
