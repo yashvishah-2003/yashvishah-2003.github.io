@@ -10,14 +10,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        /* App layout */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: #e5ddd5;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden; /* allow vertical scroll, block horizontal */
         }
-        
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         /* WhatsApp Header */
         .whatsapp-header {
             background: #075e54;
@@ -27,8 +34,9 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
-        
+
         .header-avatar {
             width: 40px;
             height: 40px;
@@ -39,25 +47,26 @@
             justify-content: center;
             font-size: 1.5em;
         }
-        
+
         .header-info {
             flex: 1;
         }
-        
+
         .header-name {
             font-size: 16px;
             font-weight: 500;
         }
-        
+
         .header-status {
             font-size: 13px;
             opacity: 0.8;
             margin-top: 2px;
         }
-        
+
         /* Chat Container */
         .chat-container {
-            height: calc(100vh - 128px);
+            flex: 1;                 /* take available vertical space */
+            min-height: 0;           /* important for flex scrolling */
             overflow-y: auto;
             padding: 20px;
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUFBQUE2NjYzMjBGMTFFNDk2RjZBQzg3RUNGMkEzQzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUFBQUE2NjczMjBGMTFFNDk2RjZBQzg3RUNGMkEzQzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBQUFBQTY2NDMyMEYxMUU0OTZGNkFDODdFQ0YyQTNDMSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBQUFBQTY2NTMyMEYxMUU0OTZGNkFDODdFQ0YyQTNDMSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pv/uAA5BZG9iZQBkAAAAAAH/2wCEAAYEBAQFBAYFBQYJBgUGCQsIBgYICwwKCgsKCgwQDAwMDAwMEAwODxAPDgwTExQUExMcGxsbHB8fHx8fHx8fHx8BBwcHDQwNGBAQGBoVERUaHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fH//AABEIAAoACgMBEQACEQEDEQH/xABVAAEBAAAAAAAAAAAAAAAAAAAABQEBAAAAAAAAAAAAAAAAAAAAABAAAAYCAwAAAAAAAAAAAAAAAAARBRIUBhMVFxEBAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKYAEB2E0v/Z');
@@ -65,23 +74,23 @@
             background-size: 300px;
             background-attachment: fixed;
         }
-        
+
         /* Message Bubbles */
         .message {
             display: flex;
             margin-bottom: 12px;
             animation: fadeIn 0.3s ease;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .message.user {
             justify-content: flex-end;
         }
-        
+
         .message-bubble {
             max-width: 70%;
             padding: 6px 7px 8px 9px;
@@ -89,19 +98,19 @@
             position: relative;
             box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
         }
-        
+
         /* Bot Message (WhatsApp White) */
         .message.bot .message-bubble {
             background: #ffffff;
             border-radius: 0 7.5px 7.5px 7.5px;
         }
-        
+
         /* User Message (WhatsApp Green) */
         .message.user .message-bubble {
             background: #dcf8c6;
             border-radius: 7.5px 0 7.5px 7.5px;
         }
-        
+
         .message-content {
             font-size: 14.2px;
             line-height: 19px;
@@ -109,7 +118,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-        
+
         .message-time {
             font-size: 11px;
             color: rgba(0,0,0,0.45);
@@ -120,66 +129,67 @@
             justify-content: flex-end;
             gap: 3px;
         }
-        
+
         .checkmark {
             color: #4fc3f7;
             font-size: 16px;
         }
-        
-        /* UPDATED: Fixed-Size Product Cards */
+
+        /* Product Cards (responsive width) */
         .product-card {
             background: white;
             border-radius: 7.5px;
             margin: 8px 0;
             overflow: hidden;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            width: 380px; /* Fixed width */
-            min-height: 240px; /* Fixed minimum height */
-            max-height: 280px; /* Fixed maximum height */
+            width: 380px;
+            max-width: 100%;            /* don't overflow on small screens */
+            min-height: 240px;
+            max-height: 280px;
             display: flex;
             flex-direction: column;
         }
-        
+
         .product-header {
             background: #128c7e;
             color: white;
             padding: 12px 10px;
             font-weight: 600;
             font-size: 14px;
-            height: 50px; /* Fixed header height */
+            height: 50px;
             display: flex;
             align-items: center;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+
         .product-body {
             padding: 10px;
             flex: 1;
             overflow-y: auto;
-            min-height: 120px; /* Fixed body height */
+            min-height: 120px;
             max-height: 140px;
         }
-        
+
         .product-row {
             display: flex;
             padding: 6px 0;
             font-size: 13px;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+
         .product-row:last-child {
             border-bottom: none;
         }
-        
+
         .product-label {
             font-weight: 600;
             color: #075e54;
             min-width: 90px;
             flex-shrink: 0;
         }
-        
+
         .product-value {
             color: #303030;
             flex: 1;
@@ -187,17 +197,17 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+
         .product-footer {
             background: #f7f7f7;
             padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px; /* Fixed footer height */
+            height: 70px;
             border-top: 1px solid #e0e0e0;
         }
-        
+
         .badge {
             padding: 5px 10px;
             border-radius: 12px;
@@ -205,23 +215,23 @@
             font-weight: 600;
             white-space: nowrap;
         }
-        
+
         .badge-stock {
             background: #d9fdd3;
             color: #128c7e;
         }
-        
+
         .badge-out {
             background: #fee;
             color: #e53935;
         }
-        
+
         .badge-price {
             background: #128c7e;
             color: white;
             font-size: 12px;
         }
-        
+
         .order-btn {
             background: #25d366;
             color: white;
@@ -234,12 +244,12 @@
             transition: all 0.2s;
             white-space: nowrap;
         }
-        
+
         .order-btn:hover {
             background: #128c7e;
             transform: scale(1.05);
         }
-        
+
         /* Typing Indicator */
         .typing-indicator {
             display: flex;
@@ -247,7 +257,7 @@
             gap: 4px;
             padding: 10px 12px;
         }
-        
+
         .typing-dot {
             width: 8px;
             height: 8px;
@@ -255,15 +265,15 @@
             background: #b3b3b3;
             animation: typing 1.4s infinite;
         }
-        
+
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
+
         @keyframes typing {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-10px); }
         }
-        
+
         /* Input Area (WhatsApp Style) */
         .input-container {
             background: #f0f0f0;
@@ -272,8 +282,9 @@
             align-items: center;
             gap: 8px;
             border-top: 1px solid #d1d1d1;
+            flex-shrink: 0;
         }
-        
+
         .input-wrapper {
             flex: 1;
             background: white;
@@ -283,7 +294,7 @@
             padding: 0 12px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-        
+
         #message-input {
             flex: 1;
             border: none;
@@ -293,7 +304,7 @@
             font-family: inherit;
             background: transparent;
         }
-        
+
         .send-btn {
             width: 48px;
             height: 48px;
@@ -308,138 +319,169 @@
             justify-content: center;
             transition: all 0.2s;
         }
-        
+
         .send-btn:hover {
             background: #075e54;
             transform: scale(1.1);
         }
-        
+
         /* Scrollbar */
         .chat-container::-webkit-scrollbar {
             width: 6px;
         }
-        
+
         .chat-container::-webkit-scrollbar-track {
             background: transparent;
         }
-        
+
         .chat-container::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.2);
             border-radius: 3px;
         }
-        
+
         .product-body::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .product-body::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.2);
             border-radius: 2px;
         }
-        
-        /* Responsive */
+
+        .qty-btn {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .qty-value {
+            display:inline-block;
+            min-width:20px;
+            text-align:center;
+            font-weight:bold;
+            font-size: 14px;
+        }
+
+        /* SIDE MENU */
+        .side-menu {
+            width: 260px;
+            height: 100%;
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: -260px;
+            transition: 0.3s ease;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            padding-top: 10px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .side-menu-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .side-menu-item {
+            padding: 15px;
+            font-size: 17px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .side-menu-item:hover {
+            background-color: #f2f2f2;
+        }
+
+        .more-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            font-weight: bold;
+            color: #c62828;
+        }
+
+        .logout-btn:hover {
+            background-color: #ffe3e3;
+        }
+
+        /* Responsive tweaks */
         @media (max-width: 768px) {
             .message-bubble {
                 max-width: 85%;
             }
-            
+
             .product-card {
-                width: 340px;
+                width: 100%;
             }
-            
+
             .product-label {
                 min-width: 80px;
                 font-size: 12px;
             }
-            
+
             .product-value {
                 font-size: 12px;
             }
-        }
-        
-        @media (max-width: 480px) {
-            .product-card {
-                width: 300px;
+
+            .side-menu {
+                width: 75%;
+                left: -75%;
             }
         }
-            .qty-btn {
-        background: #ffffff;
-        border: 1px solid #ccc;
-        width: 22px;
-        height: 22px;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .qty-value {
-        display:inline-block;
-        min-width:20px;
-        text-align:center;
-        font-weight:bold;
-        font-size: 14px;
-    }
-   
-.side-menu {
-  width: 260px;
-  height: 100%;
-  background-color: #ffffff;
-  position: fixed;
-  top: 0;
-  left: -260px; 
-  transition: 0.3s ease;
-  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
-  padding-top: 10px;
-  border-radius: 0 10px 10px 0;
-}
 
-.side-menu-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  font-size: 18px;
-  border-bottom: 1px solid #ddd;
-}
+        @media (max-width: 480px) {
+            .product-card {
+                width: 100%;
+            }
 
-.close-btn {
-  cursor: pointer;
-  font-size: 20px;
-}
+            .whatsapp-header {
+                padding: 10px 12px;
+            }
 
-.side-menu-item {
-  padding: 15px;
-  font-size: 17px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: 0.2s;
-}
+            .header-name {
+                font-size: 14px;
+            }
 
-.side-menu-item:hover {
-  background-color: #f2f2f2;
-}
+            .header-status {
+                font-size: 12px;
+            }
 
-.more-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-
-
+            .input-container {
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
-    <script>
+<script>
   // Redirect to login if user is not authenticated
   if (!localStorage.getItem("customer_name")) {
       window.location.href = "login.html";
   }
 </script>
 
-    <!-- SIDE NAV MENU -->
+<!-- SIDE NAV MENU -->
 <div id="sideMenu" class="side-menu">
   <div class="side-menu-header">
     <strong>Menu</strong>
@@ -452,10 +494,10 @@
   <div class="side-menu-item" onclick="window.location.href='admin.html'">
     Admin Dashboard
   </div>
-    <div class="side-menu-item logout-btn" onclick="logoutUser()">Logout</div>
-
+  <div class="side-menu-item logout-btn" onclick="logoutUser()">Logout</div>
 </div>
 
+<div class="app-container">
     <!-- WhatsApp Header -->
     <div class="whatsapp-header">
         <button class="more-btn" onclick="toggleMenu()">☰</button>
@@ -482,33 +524,35 @@
         </div>
         <button class="send-btn" onclick="sendMessage()">➤</button>
     </div>
-    
-    <script>
-        const user = localStorage.getItem("customer_name");
-if (!user) {
-    window.location.href = "login.html";
-}
+</div>
 
-        const API_BASE = 'https://prwfoundary-cqe9hfd4dbgxbhby.centralus-01.azurewebsites.net/';
-        let conversationId = Date.now().toString();
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            greetUser();
+<script>
+    const user = localStorage.getItem("customer_name");
+    if (!user) {
+        window.location.href = "login.html";
+    }
+
+    // UPDATED: point to Azure backend
+    const API_BASE = 'https://prwfoundary-cqe9hfd4dbgxbhby.centralus-01.azurewebsites.net';
+    let conversationId = Date.now().toString();
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        setupEventListeners();
+        greetUser();
+    });
+    
+    function setupEventListeners() {
+        const input = document.getElementById('message-input');
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+            }
         });
-        
-        function setupEventListeners() {
-            const input = document.getElementById('message-input');
-            input.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            });
-        }
-        
-        function greetUser() {
-            const greeting = `👋 Hi! I'm your Medicine Assistant.
+    }
+    
+    function greetUser() {
+        const greeting = `👋 Hi! I'm your Medicine Assistant.
 
 I can help you with:
 🔍 Search for medicines
@@ -518,248 +562,243 @@ I can help you with:
 💊 Find substitute medicines
 
 Type your query to get started!`;
-            
-            addBotMessage(greeting);
-        }
         
-        async function sendMessage() {
-            const input = document.getElementById('message-input');
-            const message = input.value.trim();
-            
-            if (!message) return;
-            
-            input.value = '';
-            addUserMessage(message);
-            showTyping();
-            
-            try {
-                const res = await fetch(`${API_BASE}/api/chat`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ 
+        addBotMessage(greeting);
+    }
+    
+    async function sendMessage() {
+        const input = document.getElementById('message-input');
+        const message = input.value.trim();
+        
+        if (!message) return;
+        
+        input.value = '';
+        addUserMessage(message);
+        showTyping();
+        
+        try {
+            const res = await fetch(`${API_BASE}/api/chat`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
                     message: message,
                     conversation_id: conversationId,
                     request_substitute: false,
                     customer_name: localStorage.getItem("customer_name")
                 })
-
-                });
-                
-                const data = await res.json();
-                removeTyping();
-                
-                if (!data.success) {
-                    addBotMessage(`❌ ${data.error || 'Something went wrong'}`);
-                    return;
-                }
-                
-                const response = data.response;
-                
-                // Display message
-                if (response.message) {
-                    addBotMessage(response.message);
-                }
-                
-                // Display products
-                if (response.products && response.products.length > 0) {
-                    setTimeout(() => displayProducts(response.products), 300);
-                }
-                
-            } catch (e) {
-                console.error('Error:', e);
-                removeTyping();
-                addBotMessage('❌ Connection error. Please check if backend is running on port 8001');
-            }
-        }
-        
-        function displayProducts(products) {
-            const container = document.getElementById('chat-container');
-            
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'message bot';
-                
-                const isInStock = product.Qty > 0;
-                const price = product.Price > 0 ? `${product.Currency_Code || '₹'}${product.Price.toFixed(2)}` : 'Price N/A';
-                const stockBadge = isInStock 
-                    ? `<span class="badge badge-stock">✓ ${product.Qty} In Stock</span>`
-                    : `<span class="badge badge-out">✗ Out of Stock</span>`;
-                
-                // Truncate product name if too long
-                const productName = product.Product_Name.length > 45 
-                    ? product.Product_Name.substring(0, 42) + '...' 
-                    : product.Product_Name;
-                
-                card.innerHTML = `
-                    <div class="message-bubble" style="max-width: 400px; padding: 0;">
-                        <div class="product-card">
-                            <div class="product-header" title="${escapeHtml(product.Product_Name)}">
-                                💊 ${escapeHtml(productName)}
-                            </div>
-                            <div class="product-body">
-                                <div class="product-row">
-                                    <span class="product-label">Generic:</span>
-                                    <span class="product-value" title="${escapeHtml(product.Generic_name || 'N/A')}">${escapeHtml(product.Generic_name || 'N/A')}</span>
-                                </div>
-                                <div class="product-row">
-                                    <span class="product-label">Brand:</span>
-                                    <span class="product-value" title="${escapeHtml(product.ProductBrand || 'Generic')}">${escapeHtml(product.ProductBrand || 'Generic')}</span>
-                                </div>
-                                ${product.Location ? `<div class="product-row">
-                                    <span class="product-label">Location:</span>
-                                    <span class="product-value" title="${escapeHtml(product.Location)}">${escapeHtml(product.Location)}</span>
-                                </div>` : ''}
-                                ${product.Expiry_Date ? `<div class="product-row">
-                                    <span class="product-label">Expiry:</span>
-                                    <span class="product-value">${escapeHtml(product.Expiry_Date)}</span>
-                                </div>` : ''}
-                            </div>
-                            <div class="product-footer">
-                                <div style="display: flex; flex-direction: column; gap: 4px;">
-                                    ${stockBadge}
-                                    ${product.Price > 0 ? `<span class="badge badge-price">${price}</span>` : ''}
-                                </div>
-                                ${isInStock ? `
-                                        <div class="qty-controls" style="display:flex;align-items:center;gap:6px;">
-                                            <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
-                                            <span class="qty-value">1</span>
-                                            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-                                        </div>
-
-                                        <button class="order-btn" onclick="placeOrder(this)">
-                                            Order Now
-                                        </button>
-                                        ` : ''}
-
-                            </div>
-                        </div>
-                        <div class="message-time">
-                            ${getCurrentTime()}
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(card);
             });
             
-            //scrollToBottom();
+            const data = await res.json();
+            removeTyping();
+            
+            if (!data.success) {
+                addBotMessage(`❌ ${data.error || 'Something went wrong'}`);
+                return;
+            }
+            
+            const response = data.response;
+            
+            // Display message
+            if (response.message) {
+                addBotMessage(response.message);
+            }
+            
+            // Display products
+            if (response.products && response.products.length > 0) {
+                setTimeout(() => displayProducts(response.products), 300);
+            }
+            
+        } catch (e) {
+            console.error('Error:', e);
+            removeTyping();
+            addBotMessage('❌ Connection error. Please check if backend is running.');
         }
+    }
+    
+    function displayProducts(products) {
+        const container = document.getElementById('chat-container');
         
-        async function placeOrder(btn) {
-    const card = btn.closest('.product-card');
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'message bot';
+            
+            const isInStock = product.Qty > 0;
+            const price = product.Price > 0 ? `${product.Currency_Code || '₹'}${product.Price.toFixed(2)}` : 'Price N/A';
+            const stockBadge = isInStock 
+                ? `<span class="badge badge-stock">✓ ${product.Qty} In Stock</span>`
+                : `<span class="badge badge-out">✗ Out of Stock</span>`;
+            
+            // Truncate product name if too long
+            const productName = product.Product_Name.length > 45 
+                ? product.Product_Name.substring(0, 42) + '...' 
+                : product.Product_Name;
+            
+            card.innerHTML = `
+                <div class="message-bubble" style="max-width: 400px; padding: 0;">
+                    <div class="product-card">
+                        <div class="product-header" title="${escapeHtml(product.Product_Name)}">
+                            💊 ${escapeHtml(productName)}
+                        </div>
+                        <div class="product-body">
+                            <div class="product-row">
+                                <span class="product-label">Generic:</span>
+                                <span class="product-value" title="${escapeHtml(product.Generic_name || 'N/A')}">${escapeHtml(product.Generic_name || 'N/A')}</span>
+                            </div>
+                            <div class="product-row">
+                                <span class="product-label">Brand:</span>
+                                <span class="product-value" title="${escapeHtml(product.ProductBrand || 'Generic')}">${escapeHtml(product.ProductBrand || 'Generic')}</span>
+                            </div>
+                            ${product.Location ? `<div class="product-row">
+                                <span class="product-label">Location:</span>
+                                <span class="product-value" title="${escapeHtml(product.Location)}">${escapeHtml(product.Location)}</span>
+                            </div>` : ''}
+                            ${product.Expiry_Date ? `<div class="product-row">
+                                <span class="product-label">Expiry:</span>
+                                <span class="product-value">${escapeHtml(product.Expiry_Date)}</span>
+                            </div>` : ''}
+                        </div>
+                        <div class="product-footer">
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                ${stockBadge}
+                                ${product.Price > 0 ? `<span class="badge badge-price">${price}</span>` : ''}
+                            </div>
+                            ${isInStock ? `
+                                    <div class="qty-controls" style="display:flex;align-items:center;gap:6px;">
+                                        <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                                        <span class="qty-value">1</span>
+                                        <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                                    </div>
 
-    const productName = card.querySelector('.product-header').innerText.replace("💊", "").trim();
-    const qty = parseInt(card.querySelector('.qty-value').textContent);
+                                    <button class="order-btn" onclick="placeOrder(this)">
+                                        Order Now
+                                    </button>
+                                    ` : ''}
 
-    addBotMessage(`📦 Ordering **${productName}** (Qty: ${qty}) ...`);
-    scrollToBottom();
-
-
-    await fetch(`${API_BASE}/api/order`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            product_name: productName,
-            qty: qty,
-            customer_name: localStorage.getItem("customer_name") // NEW
-        })
-
-    });
-
-    addBotMessage(`✅ Order Confirmed  
-**${productName} x ${qty}**  
-🚚 Delivery team will contact you soon!`);
-scrollToBottom();
-
-}
-
-
-        
-        function addUserMessage(text) {
-            const container = document.getElementById('chat-container');
-            const msg = document.createElement('div');
-            msg.className = 'message user';
-            msg.innerHTML = `
-                <div class="message-bubble">
-                    <div class="message-content">${escapeHtml(text)}</div>
+                        </div>
+                    </div>
                     <div class="message-time">
                         ${getCurrentTime()}
-                        <span class="checkmark">✓✓</span>
                     </div>
                 </div>
             `;
-            container.appendChild(msg);
-            //scrollToBottom();
-        }
-        
-        function addBotMessage(text) {
-            const container = document.getElementById('chat-container');
-            const msg = document.createElement('div');
-            msg.className = 'message bot';
             
-            // Format text with basic markdown
-            let formatted = escapeHtml(text)
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>');
-            
-            msg.innerHTML = `
-                <div class="message-bubble">
-                    <div class="message-content">${formatted}</div>
-                    <div class="message-time">${getCurrentTime()}</div>
+            container.appendChild(card);
+        });
+        
+        //scrollToBottom();
+    }
+    
+    async function placeOrder(btn) {
+        const card = btn.closest('.product-card');
+
+        const productName = card.querySelector('.product-header').innerText.replace("💊", "").trim();
+        const qty = parseInt(card.querySelector('.qty-value').textContent);
+
+        addBotMessage(`📦 Ordering **${productName}** (Qty: ${qty}) ...`);
+        scrollToBottom();
+
+        await fetch(`${API_BASE}/api/order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                product_name: productName,
+                qty: qty,
+                customer_name: localStorage.getItem("customer_name")
+            })
+        });
+
+        addBotMessage(`✅ Order Confirmed  
+**${productName} x ${qty}**  
+🚚 Delivery team will contact you soon!`);
+        scrollToBottom();
+    }
+    
+    function addUserMessage(text) {
+        const container = document.getElementById('chat-container');
+        const msg = document.createElement('div');
+        msg.className = 'message user';
+        msg.innerHTML = `
+            <div class="message-bubble">
+                <div class="message-content">${escapeHtml(text)}</div>
+                <div class="message-time">
+                    ${getCurrentTime()}
+                    <span class="checkmark">✓✓</span>
                 </div>
-            `;
-            container.appendChild(msg);
-            //scrollToBottom();
-        }
+            </div>
+        `;
+        container.appendChild(msg);
+        //scrollToBottom();
+    }
+    
+    function addBotMessage(text) {
+        const container = document.getElementById('chat-container');
+        const msg = document.createElement('div');
+        msg.className = 'message bot';
         
-        function showTyping() {
-            const container = document.getElementById('chat-container');
-            const typing = document.createElement('div');
-            typing.id = 'typing-indicator';
-            typing.className = 'message bot';
-            typing.innerHTML = `
-                <div class="message-bubble">
-                    <div class="typing-indicator">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    </div>
+        // Format text with basic markdown
+        let formatted = escapeHtml(text)
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>');
+        
+        msg.innerHTML = `
+            <div class="message-bubble">
+                <div class="message-content">${formatted}</div>
+                <div class="message-time">${getCurrentTime()}</div>
+            </div>
+        `;
+        container.appendChild(msg);
+        //scrollToBottom();
+    }
+    
+    function showTyping() {
+        const container = document.getElementById('chat-container');
+        const typing = document.createElement('div');
+        typing.id = 'typing-indicator';
+        typing.className = 'message bot';
+        typing.innerHTML = `
+            <div class="message-bubble">
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
                 </div>
-            `;
-            container.appendChild(typing);
-            scrollToBottom();
-        }
-        
-        function removeTyping() {
-            const typing = document.getElementById('typing-indicator');
-            if (typing) typing.remove();
-        }
-        
-        function scrollToBottom() {
-            const container = document.getElementById('chat-container');
-            container.scrollTop = container.scrollHeight;
-        }
-        
-        function getCurrentTime() {
-            const now = new Date();
-            return now.toLocaleTimeString('en-US', { 
-                hour: 'numeric', 
-                minute: '2-digit',
-                hour12: true 
-            });
-        }
-        
-        function escapeHtml(text) {
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return String(text).replace(/[&<>"']/g, m => map[m]);
-        }
-        function changeQty(button, change) {
+            </div>
+        `;
+        container.appendChild(typing);
+        scrollToBottom();
+    }
+    
+    function removeTyping() {
+        const typing = document.getElementById('typing-indicator');
+        if (typing) typing.remove();
+    }
+    
+    function scrollToBottom() {
+        const container = document.getElementById('chat-container');
+        container.scrollTop = container.scrollHeight;
+    }
+    
+    function getCurrentTime() {
+        const now = new Date();
+        return now.toLocaleTimeString('en-US', { 
+            hour: 'numeric', 
+            minute: '2-digit',
+            hour12: true 
+        });
+    }
+    
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;
+        };
+        return String(text).replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function changeQty(button, change) {
         const qtySpan = button.parentElement.querySelector('.qty-value');
         let qty = parseInt(qtySpan.textContent);
 
@@ -768,16 +807,16 @@ scrollToBottom();
 
         qtySpan.textContent = qty;
     }
+
     function openAdminPortal() {
-    window.location.href = "admin.html";
-}
+        window.location.href = "admin.html";
+    }
+</script>
 
-
-    </script>
-    <script>
+<script>
 function toggleMenu() {
   const menu = document.getElementById("sideMenu");
-  menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
+  menu.style.left = (menu.style.left === "0px" ? "-260px" : "0px");
 }
 function logoutUser() {
   localStorage.clear();
@@ -787,4 +826,3 @@ function logoutUser() {
 
 </body>
 </html>
-
