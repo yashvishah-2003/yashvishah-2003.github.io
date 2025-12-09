@@ -664,17 +664,12 @@ Type your query to get started!`;
                                     ${stockBadge}
                                     ${product.Price > 0 ? `<span class="badge badge-price">${price}</span>` : ''}
                                 </div>
-                                ${isInStock ? `
-                                        <div class="qty-controls" style="display:flex;align-items:center;gap:6px;">
-                                            <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
-                                            <span class="qty-value">1</span>
-                                            <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-                                        </div>
+                               ${isInStock ? `
+                                <button class="order-btn" onclick="placeOrder(this)">
+                                Order Now
+                                </button>
+                                ` : ''}
 
-                                        <button class="order-btn" onclick="placeOrder(this)">
-                                            Order Now
-                                        </button>
-                                        ` : ''}
 
                             </div>
                         </div>
@@ -832,6 +827,7 @@ function logoutUser() {
 
 </body>
 </html>
+
 
 
 
