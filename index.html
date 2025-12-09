@@ -427,7 +427,31 @@
       cursor: pointer;
       font-weight: 600;
     }
-
+/* Mobile Phones (<600px) */
+@media (max-width: 600px) {
+  .chat-container {
+    padding: 12px;
+    height: calc(100vh - 120px);
+  }
+  .message-bubble {
+    max-width: 90% !important;
+    font-size: 14px;
+  }
+  .product-card {
+    width: 95% !important;
+  }
+  .input-container {
+    padding: 8px 10px;
+  }
+  #message-input {
+    font-size: 14px;
+  }
+  .send-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+}
 
     </style>
 </head>
@@ -787,4 +811,5 @@ function logoutUser() {
 
 </body>
 </html>
+
 
