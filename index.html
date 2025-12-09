@@ -427,94 +427,6 @@
       cursor: pointer;
       font-weight: 600;
     }
-/* ==========================================================
-   RESPONSIVE BREAKPOINTS (SAFE — NO LAYOUT CHANGES)
-========================================================== */
-
-/* Mobile Phones (<600px) */
-@media (max-width: 600px) {
-  .chat-container {
-    padding: 12px;
-    height: calc(100vh - 120px);
-  }
-  .message-bubble {
-    max-width: 90% !important;
-    font-size: 14px;
-  }
-  .product-card {
-    width: 95% !important;
-  }
-  .input-container {
-    padding: 8px 10px;
-  }
-  #message-input {
-    font-size: 14px;
-  }
-  .send-btn {
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-  }
-}
-
-/* Tablet Portrait (600px – 768px) */
-@media (min-width: 600px) and (max-width: 768px) {
-  .chat-container {
-    padding: 15px 20px;
-    height: calc(100vh - 125px);
-  }
-  .message-bubble {
-    max-width: 80%;
-    font-size: 15px;
-  }
-  .product-card {
-    width: 85%;
-  }
-}
-
-/* Tablet Landscape (768px – 1024px) */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .chat-container {
-    padding: 20px 40px;
-  }
-  .message-bubble {
-    max-width: 75%;
-  }
-  .product-card {
-    width: 360px;
-  }
-}
-
-/* Standard Desktop (1024px – 1440px)
-   NO CHANGE — KEEP ORIGINAL BEHAVIOR */
-@media (min-width: 1024px) and (max-width: 1440px) {
-  .chat-container {
-    padding: 20px 70px;
-  }
-}
-
-/* Large Desktop (>1440px)
-   Only scale UI, DO NOT MODIFY BUBBLE WIDTH */
-@media (min-width: 1440px) {
-  .chat-container {
-    padding: 25px 120px;
-    height: calc(100vh - 135px);
-  }
-
-  .input-container {
-    padding: 12px 140px;
-  }
-
-  #message-input {
-    font-size: 16px;
-  }
-
-  .send-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 21px;
-  }
-}
 
 
     </style>
@@ -875,6 +787,4 @@ function logoutUser() {
 
 </body>
 </html>
-
-
 
