@@ -15,8 +15,7 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: #e5ddd5;
             height: 100vh;
-            overflow-x: hidden;
-            overflow-y: auto;
+            overflow: hidden;
         }
         
         /* WhatsApp Header */
@@ -134,9 +133,9 @@
             margin: 8px 0;
             overflow: hidden;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            width: 380px; /* Fixed width */
-            min-height: 240px; /* Fixed minimum height */
-            max-height: 280px; /* Fixed maximum height */
+            width: 380px;
+            min-height: 240px;
+            max-height: 280px;
             display: flex;
             flex-direction: column;
         }
@@ -147,7 +146,7 @@
             padding: 12px 10px;
             font-weight: 600;
             font-size: 14px;
-            height: 50px; /* Fixed header height */
+            height: 50px;
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -159,7 +158,7 @@
             padding: 10px;
             flex: 1;
             overflow-y: auto;
-            min-height: 120px; /* Fixed body height */
+            min-height: 120px;
             max-height: 140px;
         }
         
@@ -195,7 +194,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px; /* Fixed footer height */
+            height: 70px;
             border-top: 1px solid #e0e0e0;
         }
         
@@ -363,72 +362,74 @@
                 width: 300px;
             }
         }
-            .qty-btn {
-        background: #ffffff;
-        border: 1px solid #ccc;
-        width: 22px;
-        height: 22px;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    .qty-value {
-        display:inline-block;
-        min-width:20px;
-        text-align:center;
-        font-weight:bold;
-        font-size: 14px;
-    }
+        
+        .qty-btn {
+            background: #ffffff;
+            border: 1px solid #ccc;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .qty-value {
+            display: inline-block;
+            min-width: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
    
-.side-menu {
-  width: 260px;
-  height: 100%;
-  background-color: #ffffff;
-  position: fixed;
-  top: 0;
-  left: -260px; 
-  transition: 0.3s ease;
-  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 2000;
-  padding-top: 10px;
-  border-radius: 0 10px 10px 0;
-}
+        .side-menu {
+            width: 260px;
+            height: 100%;
+            background-color: #ffffff;
+            position: fixed;
+            top: 0;
+            left: -260px; 
+            transition: 0.3s ease;
+            box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            padding-top: 10px;
+            border-radius: 0 10px 10px 0;
+        }
 
-.side-menu-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  font-size: 18px;
-  border-bottom: 1px solid #ddd;
-}
+        .side-menu-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+        }
 
-.close-btn {
-  cursor: pointer;
-  font-size: 20px;
-}
+        .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+        }
 
-.side-menu-item {
-  padding: 15px;
-  font-size: 17px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: 0.2s;
-}
+        .side-menu-item {
+            padding: 15px;
+            font-size: 17px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.side-menu-item:hover {
-  background-color: #f2f2f2;
-}
+        .side-menu-item:hover {
+            background-color: #f2f2f2;
+        }
 
-.more-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-/* Mobile Phones (<600px) */
+        .more-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        /* Mobile Phones (<600px) */
 @media (max-width: 600px) {
 
   .chat-container {
@@ -472,42 +473,39 @@
     font-size: 18px;
   }
 }
-
     </style>
 </head>
 <body>
     <script>
-  // Redirect to login if user is not authenticated
-  if (!localStorage.getItem("customer_name")) {
-      window.location.href = "login.html";
-  }
-</script>
+        // Redirect to login if user is not authenticated
+        if (!localStorage.getItem("customer_name")) {
+            window.location.href = "login.html";
+        }
+    </script>
 
     <!-- SIDE NAV MENU -->
-<div id="sideMenu" class="side-menu">
-  <div class="side-menu-header">
-    <strong>Menu</strong>
-    <span class="close-btn" onclick="toggleMenu()">✖</span>
-  </div>
+    <div id="sideMenu" class="side-menu">
+        <div class="side-menu-header">
+            <strong>Menu</strong>
+            <span class="close-btn" onclick="toggleMenu()">✖</span>
+        </div>
 
-  <div class="side-menu-item" onclick="window.location.href='index.html'">
-     Chatbot
-  </div>
-  <div class="side-menu-item" onclick="window.location.href='admin.html'">
-    Admin Dashboard
-  </div>
-    <div class="side-menu-item logout-btn" onclick="logoutUser()">Logout</div>
-
-</div>
+        <div class="side-menu-item" onclick="window.location.href='index.html'">
+            💬 Chatbot
+        </div>
+        <div class="side-menu-item" onclick="window.location.href='admin.html'">
+            📊 Admin Dashboard
+        </div>
+        <div class="side-menu-item logout-btn" onclick="logoutUser()">🚪 Logout</div>
+    </div>
 
     <!-- WhatsApp Header -->
     <div class="whatsapp-header">
         <button class="more-btn" onclick="toggleMenu()">☰</button>
-
         <div class="header-avatar">💊</div>
         <div class="header-info">
             <div class="header-name">Medicine Assistant</div>
-            <div class="header-status">Online • Powered by Azure AI</div>
+            <div class="header-status">Online </div>
         </div>
     </div>
     
@@ -529,9 +527,9 @@
     
     <script>
         const user = localStorage.getItem("customer_name");
-if (!user) {
-    window.location.href = "login.html";
-}
+        if (!user) {
+            window.location.href = "login.html";
+        }
 
         const API_BASE = 'https://prwfoundary-cqe9hfd4dbgxbhby.centralus-01.azurewebsites.net/';
         let conversationId = Date.now().toString();
@@ -552,16 +550,7 @@ if (!user) {
         }
         
         function greetUser() {
-            const greeting = `👋 Hi! I'm your Medicine Assistant.
-
-I can help you with:
-🔍 Search for medicines
-💰 Check prices & availability
-🏦 Get payment details
-🕒 Check store timings
-💊 Find substitute medicines
-
-Type your query to get started!`;
+            const greeting = `👋`;
             
             addBotMessage(greeting);
         }
@@ -581,36 +570,40 @@ Type your query to get started!`;
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                    message: message,
-                    conversation_id: conversationId,
-                    request_substitute: false,
-                    customer_name: localStorage.getItem("customer_name")
-                })
-
+                        message: message,
+                        conversation_id: conversationId,
+                        customer_name: user
+                    })
                 });
                 
                 const data = await res.json();
                 removeTyping();
                 
-                if (!data.success) {
-                    addBotMessage(`❌ ${data.error || 'Something went wrong'}`);
+                console.log('📥 Response:', data); // Debug log
+                
+                // ✅ FIXED: Handle response format correctly
+                if (data.error) {
+                    addBotMessage(`❌ ${data.message || data.error}`);
                     return;
                 }
                 
-                const response = data.response;
-                
-                // Display message
-                if (response.message) {
-                    addBotMessage(response.message);
+                // Display message if present
+                if (data.message) {
+                    addBotMessage(data.message);
                 }
                 
-                // Display products
-                if (response.products && response.products.length > 0) {
-                    setTimeout(() => displayProducts(response.products), 300);
+                // Display products if present
+                if (data.products && data.products.length > 0) {
+                    setTimeout(() => displayProducts(data.products), 300);
+                } else if (data.category === 'single_product' || data.category === 'multiple_product') {
+                    // If it's a product query but no products found
+                    if (!data.message || !data.message.includes('No')) {
+                        addBotMessage('❌ No products found matching your query.');
+                    }
                 }
                 
             } catch (e) {
-                console.error('Error:', e);
+                console.error('❌ Error:', e);
                 removeTyping();
                 addBotMessage('❌ Connection error. Please check if backend is running on port 8001');
             }
@@ -647,7 +640,7 @@ Type your query to get started!`;
                                 </div>
                                 <div class="product-row">
                                     <span class="product-label">Brand:</span>
-                                    <span class="product-value" title="${escapeHtml(product.ProductBrand || 'Generic')}">${escapeHtml(product.ProductBrand || 'Generic')}</span>
+                                    <span class="product-value" title="${escapeHtml(product.Product_Brand || 'Generic')}">${escapeHtml(product.Product_Brand || 'Generic')}</span>
                                 </div>
                                 ${product.Location ? `<div class="product-row">
                                     <span class="product-label">Location:</span>
@@ -663,13 +656,16 @@ Type your query to get started!`;
                                     ${stockBadge}
                                     ${product.Price > 0 ? `<span class="badge badge-price">${price}</span>` : ''}
                                 </div>
-                               ${isInStock ? `
-                                <button class="order-btn" onclick="placeOrder(this)">
-                                Order Now
-                                </button>
+                                ${isInStock ? `
+                                    <div class="qty-controls" style="display:flex;align-items:center;gap:6px;">
+                                        <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                                        <span class="qty-value">1</span>
+                                        <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                                    </div>
+                                    <button class="order-btn" onclick="placeOrder(this, '${escapeHtml(product.Product_Name)}')">
+                                        Order Now
+                                    </button>
                                 ` : ''}
-
-
                             </div>
                         </div>
                         <div class="message-time">
@@ -681,38 +677,35 @@ Type your query to get started!`;
                 container.appendChild(card);
             });
             
-            //scrollToBottom();
+            scrollToBottom();
         }
         
-        async function placeOrder(btn) {
-    const card = btn.closest('.product-card');
+        async function placeOrder(btn, productName) {
+            const card = btn.closest('.product-card');
+            const qty = parseInt(card.querySelector('.qty-value').textContent);
 
-    const productName = card.querySelector('.product-header').innerText.replace("💊", "").trim();
-    const qty = parseInt(card.querySelector('.qty-value').textContent);
+            addBotMessage(`📦 Ordering **${productName}** (Qty: ${qty}) ...`);
+            scrollToBottom();
 
-    addBotMessage(`📦 Ordering **${productName}** (Qty: ${qty}) ...`);
-    scrollToBottom();
+            try {
+                await fetch(`${API_BASE}/api/order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        product_name: productName,
+                        qty: qty,
+                        customer_name: user
+                    })
+                });
 
-
-    await fetch(`${API_BASE}/api/order`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            product_name: productName,
-            qty: qty,
-            customer_name: localStorage.getItem("customer_name") // NEW
-        })
-
-    });
-
-    addBotMessage(`✅ Order Confirmed  
+                addBotMessage(`✅ Order Confirmed!  
 **${productName} x ${qty}**  
 🚚 Delivery team will contact you soon!`);
-scrollToBottom();
-
-}
-
-
+                scrollToBottom();
+            } catch (e) {
+                addBotMessage(`❌ Order failed. Please try again.`);
+            }
+        }
         
         function addUserMessage(text) {
             const container = document.getElementById('chat-container');
@@ -728,7 +721,7 @@ scrollToBottom();
                 </div>
             `;
             container.appendChild(msg);
-            //scrollToBottom();
+            scrollToBottom();
         }
         
         function addBotMessage(text) {
@@ -739,7 +732,8 @@ scrollToBottom();
             // Format text with basic markdown
             let formatted = escapeHtml(text)
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
             
             msg.innerHTML = `
                 <div class="message-bubble">
@@ -748,7 +742,7 @@ scrollToBottom();
                 </div>
             `;
             container.appendChild(msg);
-            //scrollToBottom();
+            scrollToBottom();
         }
         
         function showTyping() {
@@ -776,7 +770,9 @@ scrollToBottom();
         
         function scrollToBottom() {
             const container = document.getElementById('chat-container');
-            container.scrollTop = container.scrollHeight;
+            setTimeout(() => {
+                container.scrollTop = container.scrollHeight;
+            }, 100);
         }
         
         function getCurrentTime() {
@@ -798,38 +794,24 @@ scrollToBottom();
             };
             return String(text).replace(/[&<>"']/g, m => map[m]);
         }
+        
         function changeQty(button, change) {
-        const qtySpan = button.parentElement.querySelector('.qty-value');
-        let qty = parseInt(qtySpan.textContent);
-
-        qty += change;
-        if (qty < 1) qty = 1;
-
-        qtySpan.textContent = qty;
-    }
-    function openAdminPortal() {
-    window.location.href = "admin.html";
-}
-
-
+            const qtySpan = button.parentElement.querySelector('.qty-value');
+            let qty = parseInt(qtySpan.textContent);
+            qty += change;
+            if (qty < 1) qty = 1;
+            qtySpan.textContent = qty;
+        }
+        
+        function toggleMenu() {
+            const menu = document.getElementById("sideMenu");
+            menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
+        }
+        
+        function logoutUser() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
     </script>
-    <script>
-function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
-  menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
-}
-function logoutUser() {
-  localStorage.clear();
-  window.location.href = "login.html";
-}
-</script>
-
 </body>
 </html>
-
-
-
-
-
-
-
