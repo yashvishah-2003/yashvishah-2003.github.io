@@ -434,24 +434,21 @@
 
   .chat-container {
     padding: 12px;
-    height: auto;          /* Allow flexible height */
-    flex: 1;
+    height: calc(100vh - 120px); /* ✅ FIX: GIVE A REAL HEIGHT */
     overflow-y: auto;
   }
 
-  /* Always visible at bottom */
   .input-container {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 8px 10px;
-    z-index: 9999;         /* Highest priority */
+    z-index: 9999;
   }
 
-  /* Extra space so chat content doesn't hide behind input bar */
   #chat-container {
-    margin-bottom: 70px;
+    margin-bottom: 80px; /* ensures messages not hidden behind input bar */
   }
 
   .message-bubble {
@@ -462,17 +459,8 @@
   .product-card {
     width: 95% !important;
   }
-
-  #message-input {
-    font-size: 14px;
-  }
-
-  .send-btn {
-    width: 42px;
-    height: 42px;
-    font-size: 18px;
-  }
 }
+
     </style>
 </head>
 <body>
@@ -815,4 +803,5 @@
     </script>
 </body>
 </html>
+
 
