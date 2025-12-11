@@ -2,67 +2,67 @@
 <html>
 <head>
     <title>Login | Medicine Bot</title>
-
-    <!-- CRITICAL FOR MOBILE RESPONSIVENESS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             background: #075e54;
             color: white;
-            min-height: 100vh;     /* instead of fixed 100vh */
-            height: auto;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            overflow-y: auto;      /* allow scrolling on mobile */
         }
 
         .login-box {
             background: rgba(255, 255, 255, 0.12);
             padding: 35px 32px;
             border-radius: 18px;
-            width: 90%;            /* fully fluid */
-            max-width: 420px;      /* smaller than before for phones */
+            width: 480px;
             text-align: center;
             box-shadow: 0 6px 18px rgba(0,0,0,0.35);
         }
 
         h2 {
-            margin: 0 0 22px 0;
-            font-size: 1.6rem;
+            margin: 0;
+            margin-bottom: 24px;
+            font-size: 24px;
             font-weight: bold;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 12px;   /* equal spacing between inputs & button */
+            width: 100%;
+        }
+
+        .login-form input,
+        .login-form button {
             width: 100%;
         }
 
         .login-form input {
-            padding: 14px;
+            padding: 12px 14px;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 15px;
             outline: none;
         }
 
         .login-form button {
-            padding: 14px;
+            padding: 12px 14px;
             background: #25d366;
             border: none;
             color: white;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 16px;
             transition: background 0.25s;
         }
 
@@ -73,16 +73,9 @@
         #error-msg {
             margin-top: 14px;
             color: #ffbbbb;
-            font-size: 0.9rem;
-            min-height: 18px;
+            font-size: 14px;
+            min-height: 18px; /* keeps layout stable even when no error */
         }
-
-        /* Tablets */
-        @media (max-width: 768px) {
-            .login-box { padding: 28px 24px; }
-            h2 { font-size: 1.4rem; }
-        }
-
         /* Phones */
         @media (max-width: 480px) {
             .login-box {
@@ -97,8 +90,8 @@
         }
     </style>
 </head>
-
 <body>
+
 <div class="login-box">
     <h2>Login to Medicine Bot</h2>
 
@@ -150,4 +143,3 @@ async function login() {
 
 </body>
 </html>
-
