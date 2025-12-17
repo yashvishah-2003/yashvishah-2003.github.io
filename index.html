@@ -10,14 +10,14 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
             background: #e5ddd5;
             height: 100vh;
-            overflow: visible;
+            overflow: hidden;
         }
-        
+
         /* WhatsApp Header */
         .whatsapp-header {
             background: #075e54;
@@ -28,7 +28,7 @@
             gap: 12px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-        
+
         .header-avatar {
             width: 40px;
             height: 40px;
@@ -39,22 +39,22 @@
             justify-content: center;
             font-size: 1.5em;
         }
-        
+
         .header-info {
             flex: 1;
         }
-        
+
         .header-name {
             font-size: 16px;
             font-weight: 500;
         }
-        
+
         .header-status {
             font-size: 13px;
             opacity: 0.8;
             margin-top: 2px;
         }
-        
+
         /* Chat Container */
         .chat-container {
             height: calc(100vh - 128px);
@@ -65,23 +65,23 @@
             background-size: 300px;
             background-attachment: fixed;
         }
-        
+
         /* Message Bubbles */
         .message {
             display: flex;
             margin-bottom: 12px;
             animation: fadeIn 0.3s ease;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .message.user {
             justify-content: flex-end;
         }
-        
+
         .message-bubble {
             max-width: 70%;
             padding: 6px 7px 8px 9px;
@@ -89,19 +89,19 @@
             position: relative;
             box-shadow: 0 1px 0.5px rgba(0,0,0,0.13);
         }
-        
+
         /* Bot Message (WhatsApp White) */
         .message.bot .message-bubble {
             background: #ffffff;
             border-radius: 0 7.5px 7.5px 7.5px;
         }
-        
+
         /* User Message (WhatsApp Green) */
         .message.user .message-bubble {
             background: #dcf8c6;
             border-radius: 7.5px 0 7.5px 7.5px;
         }
-        
+
         .message-content {
             font-size: 14.2px;
             line-height: 19px;
@@ -109,7 +109,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-        
+
         .message-time {
             font-size: 11px;
             color: rgba(0,0,0,0.45);
@@ -120,13 +120,13 @@
             justify-content: flex-end;
             gap: 3px;
         }
-        
+
         .checkmark {
             color: #4fc3f7;
             font-size: 16px;
         }
-        
-        /* UPDATED: Fixed-Size Product Cards */
+
+        /* Product Cards */
         .product-card {
             background: white;
             border-radius: 7.5px;
@@ -134,12 +134,12 @@
             overflow: hidden;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             width: 380px;
-            min-height: 240px;
+            min-height: 180px;
             max-height: 280px;
             display: flex;
             flex-direction: column;
         }
-        
+
         .product-header {
             background: #128c7e;
             color: white;
@@ -153,33 +153,33 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+
         .product-body {
             padding: 10px;
             flex: 1;
             overflow-y: auto;
-            min-height: 120px;
-            max-height: 140px;
+            min-height: 100px;
+            max-height: 200px;
         }
-        
+
         .product-row {
             display: flex;
             padding: 6px 0;
             font-size: 13px;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+
         .product-row:last-child {
             border-bottom: none;
         }
-        
+
         .product-label {
             font-weight: 600;
             color: #075e54;
             min-width: 90px;
             flex-shrink: 0;
         }
-        
+
         .product-value {
             color: #303030;
             flex: 1;
@@ -187,59 +187,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
-        .product-footer {
-            background: #f7f7f7;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .badge {
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        
-        .badge-stock {
-            background: #d9fdd3;
-            color: #128c7e;
-        }
-        
-        .badge-out {
-            background: #fee;
-            color: #e53935;
-        }
-        
-        .badge-price {
-            background: #128c7e;
-            color: white;
-            font-size: 12px;
-        }
-        
-        .order-btn {
-            background: #25d366;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 18px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        
-        .order-btn:hover {
-            background: #128c7e;
-            transform: scale(1.05);
-        }
-        
+
         /* Typing Indicator */
         .typing-indicator {
             display: flex;
@@ -247,7 +195,7 @@
             gap: 4px;
             padding: 10px 12px;
         }
-        
+
         .typing-dot {
             width: 8px;
             height: 8px;
@@ -255,15 +203,15 @@
             background: #b3b3b3;
             animation: typing 1.4s infinite;
         }
-        
+
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
         .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-        
+
         @keyframes typing {
             0%, 60%, 100% { transform: translateY(0); }
             30% { transform: translateY(-10px); }
         }
-        
+
         /* Input Area (WhatsApp Style) */
         .input-container {
             background: #f0f0f0;
@@ -273,7 +221,7 @@
             gap: 8px;
             border-top: 1px solid #d1d1d1;
         }
-        
+
         .input-wrapper {
             flex: 1;
             background: white;
@@ -283,7 +231,7 @@
             padding: 0 12px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-        
+
         #message-input {
             flex: 1;
             border: none;
@@ -293,7 +241,7 @@
             font-family: inherit;
             background: transparent;
         }
-        
+
         .send-btn {
             width: 48px;
             height: 48px;
@@ -308,80 +256,36 @@
             justify-content: center;
             transition: all 0.2s;
         }
-        
+
         .send-btn:hover {
             background: #075e54;
             transform: scale(1.1);
         }
-        
+
         /* Scrollbar */
         .chat-container::-webkit-scrollbar {
             width: 6px;
         }
-        
+
         .chat-container::-webkit-scrollbar-track {
             background: transparent;
         }
-        
+
         .chat-container::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.2);
             border-radius: 3px;
         }
-        
+
         .product-body::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .product-body::-webkit-scrollbar-thumb {
             background: rgba(0,0,0,0.2);
             border-radius: 2px;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .message-bubble {
-                max-width: 85%;
-            }
-            
-            .product-card {
-                width: 340px;
-            }
-            
-            .product-label {
-                min-width: 80px;
-                font-size: 12px;
-            }
-            
-            .product-value {
-                font-size: 12px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .product-card {
-                width: 300px;
-            }
-        }
-        
-        .qty-btn {
-            background: #ffffff;
-            border: 1px solid #ccc;
-            width: 22px;
-            height: 22px;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .qty-value {
-            display: inline-block;
-            min-width: 20px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-        }
-   
+
+        /* Side Menu */
         .side-menu {
             width: 260px;
             height: 100%;
@@ -429,38 +333,73 @@
             cursor: pointer;
             font-weight: 600;
         }
-        /* Mobile Phones (<600px) */
-@media (max-width: 600px) {
 
-  .chat-container {
-    padding: 12px;
-    height: calc(100vh - 120px); /* ✅ FIX: GIVE A REAL HEIGHT */
-    overflow-y: auto;
-  }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .message-bubble {
+                max-width: 85%;
+            }
 
-  .input-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 8px 10px;
-    z-index: 9999;
-  }
+            .product-card {
+                width: 340px;
+            }
 
-  #chat-container {
-    margin-bottom: 80px; /* ensures messages not hidden behind input bar */
-  }
+            .product-label {
+                min-width: 80px;
+                font-size: 12px;
+            }
 
-  .message-bubble {
-    max-width: 90% !important;
-    font-size: 14px;
-  }
+            .product-value {
+                font-size: 12px;
+            }
+        }
 
-  .product-card {
-    width: 95% !important;
-  }
-}
+        @media (max-width: 600px) {
+            .chat-container {
+                padding: 12px;
+                height: auto;
+                flex: 1;
+                overflow-y: auto;
+            }
 
+            .input-container {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 8px 10px;
+                z-index: 9999;
+            }
+
+            #chat-container {
+                margin-bottom: 70px;
+            }
+
+            .message-bubble {
+                max-width: 90% !important;
+                font-size: 14px;
+            }
+
+            .product-card {
+                width: 95% !important;
+            }
+
+            #message-input {
+                font-size: 14px;
+            }
+
+            .send-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-card {
+                width: 300px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -479,12 +418,12 @@
         </div>
 
         <div class="side-menu-item" onclick="window.location.href='index.html'">
-            Chatbot
+            💬 Chatbot
         </div>
         <div class="side-menu-item" onclick="window.location.href='admin.html'">
-            Admin Dashboard
+            📊 Admin Dashboard
         </div>
-        <div class="side-menu-item logout-btn" onclick="logoutUser()">Logout</div>
+        <div class="side-menu-item logout-btn" onclick="logoutUser()">🚪 Logout</div>
     </div>
 
     <!-- WhatsApp Header -->
@@ -493,13 +432,13 @@
         <div class="header-avatar">💊</div>
         <div class="header-info">
             <div class="header-name">Medicine Assistant</div>
-            <div class="header-status">Online </div>
+            <div class="header-status">Online</div>
         </div>
     </div>
-    
+
     <!-- Chat Messages -->
     <div class="chat-container" id="chat-container"></div>
-    
+
     <!-- Input Area -->
     <div class="input-container">
         <div class="input-wrapper">
@@ -512,21 +451,21 @@
         </div>
         <button class="send-btn" onclick="sendMessage()">➤</button>
     </div>
-    
+
     <script>
         const user = localStorage.getItem("customer_name");
         if (!user) {
             window.location.href = "login.html";
         }
 
-        const API_BASE = 'https://prwfoundary-cqe9hfd4dbgxbhby.centralus-01.azurewebsites.net/';
+        const API_BASE = 'https://testenvironmentwhatapp-gudzcbduc7d7aad5.eastus2-01.azurewebsites.net/';
         let conversationId = Date.now().toString();
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             setupEventListeners();
             greetUser();
         });
-        
+
         function setupEventListeners() {
             const input = document.getElementById('message-input');
             input.addEventListener('keypress', (e) => {
@@ -536,23 +475,22 @@
                 }
             });
         }
-        
+
         function greetUser() {
             const greeting = `👋`;
-            
             addBotMessage(greeting);
         }
-        
+
         async function sendMessage() {
             const input = document.getElementById('message-input');
             const message = input.value.trim();
-            
+
             if (!message) return;
-            
+
             input.value = '';
             addUserMessage(message);
             showTyping();
-            
+
             try {
                 const res = await fetch(`${API_BASE}/api/chat`, {
                     method: 'POST',
@@ -563,58 +501,46 @@
                         customer_name: user
                     })
                 });
-                
+
                 const data = await res.json();
                 removeTyping();
-                
-                console.log('📥 Response:', data); // Debug log
-                
-                // ✅ FIXED: Handle response format correctly
+
+                console.log('📥 Response:', data);
+
                 if (data.error) {
                     addBotMessage(`❌ ${data.message || data.error}`);
                     return;
                 }
-                
+
                 // Display message if present
                 if (data.message) {
                     addBotMessage(data.message);
                 }
-                
+
                 // Display products if present
                 if (data.products && data.products.length > 0) {
                     setTimeout(() => displayProducts(data.products), 300);
-                } else if (data.category === 'single_product' || data.category === 'multiple_product') {
-                    // If it's a product query but no products found
-                    if (!data.message || !data.message.includes('No')) {
-                        addBotMessage('❌ No products found matching your query.');
-                    }
                 }
-                
+
             } catch (e) {
                 console.error('❌ Error:', e);
                 removeTyping();
                 addBotMessage('❌ Connection error. Please check if backend is running on port 8001');
             }
         }
-        
+
         function displayProducts(products) {
             const container = document.getElementById('chat-container');
-            
+
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'message bot';
-                
-                const isInStock = product.Qty > 0;
-                const price = product.Price > 0 ? `${product.Currency_Code || '₹'}${product.Price.toFixed(2)}` : 'Price N/A';
-                const stockBadge = isInStock 
-                    ? `<span class="badge badge-stock">✓ ${product.Qty} In Stock</span>`
-                    : `<span class="badge badge-out">✗ Out of Stock</span>`;
-                
+
                 // Truncate product name if too long
                 const productName = product.Product_Name.length > 45 
                     ? product.Product_Name.substring(0, 42) + '...' 
                     : product.Product_Name;
-                
+
                 card.innerHTML = `
                     <div class="message-bubble" style="max-width: 400px; padding: 0;">
                         <div class="product-card">
@@ -639,62 +565,19 @@
                                     <span class="product-value">${escapeHtml(product.Expiry_Date)}</span>
                                 </div>` : ''}
                             </div>
-                            <div class="product-footer">
-                                <div style="display: flex; flex-direction: column; gap: 4px;">
-                                    ${stockBadge}
-                                    ${product.Price > 0 ? `<span class="badge badge-price">${price}</span>` : ''}
-                                </div>
-                                ${isInStock ? `
-                                    <div class="qty-controls" style="display:flex;align-items:center;gap:6px;">
-                                        <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
-                                        <span class="qty-value">1</span>
-                                        <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
-                                    </div>
-                                    <button class="order-btn" onclick="placeOrder(this, '${escapeHtml(product.Product_Name)}')">
-                                        Order Now
-                                    </button>
-                                ` : ''}
-                            </div>
                         </div>
                         <div class="message-time">
                             ${getCurrentTime()}
                         </div>
                     </div>
                 `;
-                
+
                 container.appendChild(card);
             });
-            
+
             scrollToBottom();
         }
-        
-        async function placeOrder(btn, productName) {
-            const card = btn.closest('.product-card');
-            const qty = parseInt(card.querySelector('.qty-value').textContent);
 
-            addBotMessage(`📦 Ordering **${productName}** (Qty: ${qty}) ...`);
-            scrollToBottom();
-
-            try {
-                await fetch(`${API_BASE}/api/order`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        product_name: productName,
-                        qty: qty,
-                        customer_name: user
-                    })
-                });
-
-                addBotMessage(`✅ Order Confirmed!  
-**${productName} x ${qty}**  
-🚚 Delivery team will contact you soon!`);
-                scrollToBottom();
-            } catch (e) {
-                addBotMessage(`❌ Order failed. Please try again.`);
-            }
-        }
-        
         function addUserMessage(text) {
             const container = document.getElementById('chat-container');
             const msg = document.createElement('div');
@@ -711,18 +594,18 @@
             container.appendChild(msg);
             scrollToBottom();
         }
-        
+
         function addBotMessage(text) {
             const container = document.getElementById('chat-container');
             const msg = document.createElement('div');
             msg.className = 'message bot';
-            
+
             // Format text with basic markdown
             let formatted = escapeHtml(text)
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
                 .replace(/\n/g, '<br>');
-            
+
             msg.innerHTML = `
                 <div class="message-bubble">
                     <div class="message-content">${formatted}</div>
@@ -732,7 +615,7 @@
             container.appendChild(msg);
             scrollToBottom();
         }
-        
+
         function showTyping() {
             const container = document.getElementById('chat-container');
             const typing = document.createElement('div');
@@ -750,19 +633,19 @@
             container.appendChild(typing);
             scrollToBottom();
         }
-        
+
         function removeTyping() {
             const typing = document.getElementById('typing-indicator');
             if (typing) typing.remove();
         }
-        
+
         function scrollToBottom() {
             const container = document.getElementById('chat-container');
             setTimeout(() => {
                 container.scrollTop = container.scrollHeight;
             }, 100);
         }
-        
+
         function getCurrentTime() {
             const now = new Date();
             return now.toLocaleTimeString('en-US', { 
@@ -771,7 +654,7 @@
                 hour12: true 
             });
         }
-        
+
         function escapeHtml(text) {
             const map = {
                 '&': '&amp;',
@@ -782,20 +665,12 @@
             };
             return String(text).replace(/[&<>"']/g, m => map[m]);
         }
-        
-        function changeQty(button, change) {
-            const qtySpan = button.parentElement.querySelector('.qty-value');
-            let qty = parseInt(qtySpan.textContent);
-            qty += change;
-            if (qty < 1) qty = 1;
-            qtySpan.textContent = qty;
-        }
-        
+
         function toggleMenu() {
             const menu = document.getElementById("sideMenu");
             menu.style.left = menu.style.left === "0px" ? "-260px" : "0px";
         }
-        
+
         function logoutUser() {
             localStorage.clear();
             window.location.href = "login.html";
@@ -803,6 +678,3 @@
     </script>
 </body>
 </html>
-
-
-
